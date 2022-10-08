@@ -1,10 +1,13 @@
 const complimentBtn = document.getElementById("complimentButton")
 const fortuneBtn = document.getElementById("fortuneButton")
 
-
 const goalBtn = document.getElementById("goalButton")
 const input = document.getElementById("suggestionInput")
+const deleteBtn = document.getElementsByClassName("delete-goal")
+
 const errCallback = err => console.log(err.response.data)
+
+
 
 const getCompliment = () => {
     axios.get("http://localhost:4000/api/compliment/")
@@ -27,8 +30,6 @@ const addGoal = (event) => {
 
     let newGoal = input.value
     let body = {goal: newGoal}
-
-    console.log(body)
     
     axios.post("http://localhost:4000/api/goals/", body)
     .then(response => {
@@ -40,11 +41,13 @@ const addGoal = (event) => {
         newList.innerText = data //whatever comes back from server
         //list of every item plus what they sent
         list.append(newList)
-
     })
     .catch(errCallback);
 };
 
+
+
 complimentBtn.addEventListener('click', getCompliment)
 fortuneBtn.addEventListener('click', getFortune)
 goalBtn.addEventListener('click', addGoal)
+deleteBtn.addEventListener('click', deleteGaol)
