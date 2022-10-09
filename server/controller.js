@@ -1,5 +1,5 @@
 let listOfGoal = ['Stay focused', 'Stay motivated', 'Work hard']
-let goals = ['Goal 1', 'Goal 2', 'Goal 3']
+
 
 
 module.exports = {
@@ -26,21 +26,20 @@ module.exports = {
         res.status(200).send(randomFortune);
     },
 
+
+    getGoals: (req, res) => {
+        res.status(200).send(listOfGoal)
+    },
+
     addGoal: (req, res) => {
         const { goal } = req.body;
         listOfGoal.push(goal);
-
-        res.status(200).send(goal);
-
+        res.status(200).send(listOfGoal);
     },
 
     deleteGoal: (req, res) => {
-        let goals = ['Goal 1', 'Goal 2', 'Goal 3']
-        const { id } = req.params
-        for (let i = 0; i < goals.length; i++){
-            if(goals[i].id === id){
-                goals.splice(i, 1)
-            }
-        }
-    }
+        const { index } = req.params;
+        listOfGoal.splice(+index, 1);
+        res.status(200).send(listOfGoal);
+    },
 }
